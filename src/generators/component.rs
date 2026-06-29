@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use heck::ToUpperCamelCase;
 use crate::fs_utils::write_new_file;
 
-pub fn generate_component(name: &str, with_css: bool) -> io::Result<()> {
+pub fn generate_component(name: &str, with_css: bool, with_props: bool) -> io::Result<()> {
     let component_name = name.to_upper_camel_case();
     let dir = PathBuf::from("src/components").join(&component_name);
 
@@ -17,10 +17,21 @@ pub fn generate_component(name: &str, with_css: bool) -> io::Result<()> {
         String::new()
     };
 
+    let props_type = if with_props {
+        format!("type {component_name}Props = {{\n  \n}};\n\n")
+    } else {
+        String::new()
+    };
+
+    let function_signature = match with_props {
+        true => format!("export function {component_name}({{}}: {component_name}Props) {{"),
+        false => format!("export function {component_name}() {{"),
+    };
+
     let content = format!(
-        "{import_style}export function {component_name}() {{
+        "{import_style}{props_type}{function_signature}
   return (
-    <div>
+    <div className={{styles.root}}>
       {component_name}
     </div>
   );
@@ -32,7 +43,7 @@ pub fn generate_component(name: &str, with_css: bool) -> io::Result<()> {
 
     if with_css {
         let style_path = dir.join(format!("{component_name}.module.css"));
-        write_new_file(&style_path, "")?;
+        write_new_file(&style_path, ".root {\n}\n")?;
     }
 
     println!("Created component: {}", component_path.display());
