@@ -26,6 +26,9 @@ pub enum Command {
         
         #[arg(long)]
         docs: bool,
+        
+        #[arg(long)]
+        test: bool,
     },
 }
 

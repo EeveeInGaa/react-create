@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use heck::ToUpperCamelCase;
 use crate::fs_utils::write_new_file;
 
-pub fn generate_component(name: &str, with_css: bool, with_props: bool, with_docs: bool) -> io::Result<()> {
+pub fn generate_component(name: &str, with_css: bool, with_props: bool, with_docs: bool, with_test: bool) -> io::Result<()> {
     let component_name = name.to_upper_camel_case();
     let dir = PathBuf::from("src/components").join(&component_name);
 
@@ -52,7 +52,22 @@ pub fn generate_component(name: &str, with_css: bool, with_props: bool, with_doc
         write_new_file(&docs_path, &docs_content)?;
     }
 
-    println!("Created component: {}", component_path.display());
+    if with_test {
+        let docs_path = dir.join(format!("{component_name}.test.tsx"));
+        let docs_content = format!(
+            r#"import {{ describe, expect, it }} from 'vitest';
+
+describe('{component_name}', () => {{
+    it('should ...', () => {{
+        expect().toBe();
+    }});
+}});
+"#
+        );
+        write_new_file(&docs_path, &docs_content)?;
+    }
+
+    println!("Created component: {} (at {})", component_name, component_path.display());
 
     Ok(())
 }
