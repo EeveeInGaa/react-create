@@ -1,11 +1,12 @@
 use std::{fs, io};
-use std::path::PathBuf;
+use std::path::{Path};
 use heck::ToUpperCamelCase;
 use crate::fs_utils::write_new_file;
 use console::style;
 
 pub fn generate_component(
     name: &str,
+    base_path: &Path,
     with_css: bool,
     with_props: bool,
     with_docs: bool,
@@ -13,7 +14,7 @@ pub fn generate_component(
     with_story: bool
 ) -> io::Result<()> {
     let component_name = name.to_upper_camel_case();
-    let dir = PathBuf::from("src/components").join(&component_name);
+    let dir = base_path.join(&component_name);
 
     fs::create_dir_all(&dir)?;
 

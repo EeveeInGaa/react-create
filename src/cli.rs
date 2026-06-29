@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand, ValueEnum};
+use std::path::PathBuf;
 
 #[derive(Parser)]
 #[command(name = "rea")]
@@ -20,18 +21,21 @@ pub enum Command {
 
         #[arg(long)]
         css: bool,
-        
+
         #[arg(long)]
         props: bool,
-        
+
         #[arg(long)]
         docs: bool,
-        
+
         #[arg(long)]
         test: bool,
-        
+
         #[arg(long)]
         story: bool,
+
+        #[arg(long, default_value = "src/components")]
+        path: PathBuf,
     },
 }
 
