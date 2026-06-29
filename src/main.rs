@@ -13,8 +13,8 @@ fn main() -> io::Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Command::Gen { kind, name, css, props, docs, test } => match kind {
-            Kind::Component => generate_component(&name, css, props, docs, test)?,
+        Command::Gen { kind, name, css, props, docs, test, story } => match kind {
+            Kind::Component => generate_component(&name, css, props, docs, test, story)?,
             Kind::Hook => generate_hook(&name)?,
         },
     }

@@ -29,6 +29,9 @@ pub enum Command {
         
         #[arg(long)]
         test: bool,
+        
+        #[arg(long)]
+        story: bool,
     },
 }
 
