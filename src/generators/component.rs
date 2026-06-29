@@ -4,7 +4,14 @@ use heck::ToUpperCamelCase;
 use crate::fs_utils::write_new_file;
 use console::style;
 
-pub fn generate_component(name: &str, with_css: bool, with_props: bool, with_docs: bool, with_test: bool, with_story: bool) -> io::Result<()> {
+pub fn generate_component(
+    name: &str,
+    with_css: bool,
+    with_props: bool,
+    with_docs: bool,
+    with_test: bool,
+    with_story: bool
+) -> io::Result<()> {
     let component_name = name.to_upper_camel_case();
     let dir = PathBuf::from("src/components").join(&component_name);
 
@@ -29,10 +36,15 @@ pub fn generate_component(name: &str, with_css: bool, with_props: bool, with_doc
         false => format!("export function {component_name}() {{"),
     };
 
+    let root_attributes = match with_css {
+        true => " className={styles.root}",
+        false => "",
+    };
+
     let content = format!(
         "{import_style}{props_type}{function_signature}
   return (
-    <div className={{styles.root}}>
+    <div{root_attributes}>
       {component_name}
     </div>
   );
