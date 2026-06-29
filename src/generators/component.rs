@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use heck::ToUpperCamelCase;
 use crate::fs_utils::write_new_file;
 
-pub fn generate_component(name: &str, with_css: bool, with_props: bool) -> io::Result<()> {
+pub fn generate_component(name: &str, with_css: bool, with_props: bool, with_docs: bool) -> io::Result<()> {
     let component_name = name.to_upper_camel_case();
     let dir = PathBuf::from("src/components").join(&component_name);
 
@@ -44,6 +44,12 @@ pub fn generate_component(name: &str, with_css: bool, with_props: bool) -> io::R
     if with_css {
         let style_path = dir.join(format!("{component_name}.module.css"));
         write_new_file(&style_path, ".root {\n}\n")?;
+    }
+
+    if with_docs {
+        let docs_path = dir.join(format!("{component_name}.docs.mdx"));
+        let docs_content = format!("# {component_name} Documentation\n");
+        write_new_file(&docs_path, &docs_content)?;
     }
 
     println!("Created component: {}", component_path.display());

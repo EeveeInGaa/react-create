@@ -23,6 +23,9 @@ pub enum Command {
         
         #[arg(long)]
         props: bool,
+        
+        #[arg(long)]
+        docs: bool,
     },
 }
 
