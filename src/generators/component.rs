@@ -2,6 +2,7 @@ use std::{fs, io};
 use std::path::PathBuf;
 use heck::ToUpperCamelCase;
 use crate::fs_utils::write_new_file;
+use console::style;
 
 pub fn generate_component(name: &str, with_css: bool, with_props: bool, with_docs: bool, with_test: bool, with_story: bool) -> io::Result<()> {
     let component_name = name.to_upper_camel_case();
@@ -72,7 +73,11 @@ describe('{component_name}', () => {{
         write_new_file(&docs_path, "")?;
     }
 
-    println!("Created component: {} (at {})", component_name, component_path.display());
+    println!(
+        "Created Component: {} {}",
+        style(component_name).cyan().bold(),
+        style(format!("(at: {})", component_path.display())).dim()
+    );
 
     Ok(())
 }
