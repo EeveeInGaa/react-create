@@ -18,7 +18,7 @@ A simple tool to create components and custom hooks from the terminal in React p
 ```
 rea g c <ComponentName> / rea gen component <ComponentName>
 ```
-(simplest use case; creates **_tsx_** file with selected name in a folder) 
+(simplest use case; creates **_tsx_** file with selected name in a 'components' folder) 
 
 > Component Names are supposed to be in **PascalCase/Capitalized** (`ComponentName` or `Component`), 
  however, even if you use **camelCase/lowercase** (`componentName` or `component`), 
@@ -38,7 +38,7 @@ Story File | `--story` | creates **empty** Storybook file (needs to be installed
 ```
 rea g h <hookName> / rea gen hook <hookName>
 ```
-(creates **_ts_** file with selected name in a folder)
+(creates **_ts_** file with selected name in a 'hooks' folder)
 
 > Hook name will be in **camelCase/lowercase** (`useHookName` or `useName`; 'use' gets added automatically), <br>
 > File name will equal hook name (`useHookName` or `useName`; no suffix). <br>
@@ -50,7 +50,7 @@ Currently, there are no options for hooks.
 ```
 rea g fn <functionName> / rea gen function <functionName>
 ```
-(creates **_ts_** file with selected name in an utils folder)
+(creates **_ts_** file with selected name in a 'functions' folder)
 
 > Function name will be in **camelCase/lowercase** (`functionName` or `name`), <br>
 > File name will be in **kebab-case** (`function-name` or `name`; no suffix). <br>
@@ -62,7 +62,7 @@ Currently, there are no options for functions.
 ```
 rea g i <InterfaceName> / rea gen interface <InterfaceName>
 ```
-(creates **_ts_** file with selected name in an utils folder)
+(creates **_ts_** file with selected name in an 'interfaces' folder)
 
 > Interface name will be in **PascalCase/Capitalized** (`InterfaceName` or `Name`), <br>
 > File name will be in **kebab-case** (`interface-name` or `name`; no suffix). <br>
@@ -74,7 +74,7 @@ Currently, there are no options for interfaces.
 ```
 rea g t <TypeName> / rea gen type <TypeName>
 ```
-(creates **_ts_** file with selected name in an utils folder)
+(creates **_ts_** file with selected name in a 'types' folder)
 
 > Type name will be in **PascalCase/Capitalized** (`TypeName` or `Name`), <br>
 > File name will be in **kebab-case** (`type-name` or `name`; no suffix). <br>
@@ -86,7 +86,7 @@ Currently, there are no options for types.
 ```
 rea g e <EnumName> / rea gen enum <EnumName>
 ```
-(creates ts file with selected name in an utils folder)
+(creates ts file with selected name in an 'enums' folder)
 
 > Enum name will be in **PascalCase/Capitalized** (`EnumName` or `Name`), <br>
 > File name will be in **kebab-case** (`enum-name` or `name`; no suffix). <br>

@@ -39,21 +39,21 @@ fn main() -> io::Result<()> {
             Generator::Interface { common } => {
                 let base_path = common
                     .path
-                    .unwrap_or_else(|| "src/utils/interfaces".into());
+                    .unwrap_or_else(|| "src/interfaces".into());
                 generate_interface(&common.name, &base_path)?;
             }
             Generator::Enum { common } => {
-                let base_path = common.path.unwrap_or_else(|| "src/utils/enums".into());
+                let base_path = common.path.unwrap_or_else(|| "src/enums".into());
                 generate_enum(&common.name, &base_path)?;
             }
             Generator::Type { common } => {
-                let base_path = common.path.unwrap_or_else(|| "src/utils/types".into());
+                let base_path = common.path.unwrap_or_else(|| "src/types".into());
                 generate_type(&common.name, &base_path)?;
             }
             Generator::Function { common } => {
                 let base_path = common
                     .path
-                    .unwrap_or_else(|| "src/utils/functions".into());
+                    .unwrap_or_else(|| "src/functions".into());
                 generate_function(&common.name, &base_path)?;
             }
         },
