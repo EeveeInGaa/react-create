@@ -1,5 +1,6 @@
 use std::{fs, io};
 use std::path::PathBuf;
+use console::style;
 use heck::ToUpperCamelCase;
 use crate::fs_utils::write_new_file;
 
@@ -20,7 +21,11 @@ pub fn generate_hook(name: &str) -> io::Result<()> {
 
     write_new_file(&hook_path, &content)?;
 
-    println!("Created hook: {}", hook_path.display());
+    println!(
+        "Created Interface: {} {}",
+        style(hook_name).cyan().bold(),
+        style(format!("(at: {})", hook_path.display())).dim()
+    );
 
     Ok(())
 }

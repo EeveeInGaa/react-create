@@ -43,7 +43,7 @@ Currently, there are no options for hooks.
   - [ ] context
   - [ ] store
   - [ ] type
-  - [ ] interface
+  - [x] interface
   - [ ] enum
   - [ ] function
 - [ ] options for hooks

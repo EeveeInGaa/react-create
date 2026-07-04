@@ -7,7 +7,7 @@ use std::io;
 use clap::Parser;
 
 use cli::{Cli, Command, Kind};
-use generators::{generate_component, generate_hook};
+use generators::{generate_component, generate_hook, generate_interface};
 
 fn main() -> io::Result<()> {
     let cli = Cli::parse();
@@ -22,10 +22,21 @@ fn main() -> io::Result<()> {
             test,
             story,
             path
-        } => match kind {
-            Kind::Component => generate_component(&name, &path, css, props, docs, test, story)?,
-            Kind::Hook => generate_hook(&name)?,
-        },
+        } => {
+            let base_path = path.unwrap_or_else(|| match kind {
+                Kind::Component => "src/components".into(),
+                Kind::Hook => "src/hooks".into(),
+                Kind::Interface => "src/interfaces".into(),
+            });
+
+            match kind {
+                Kind::Component => {
+                    generate_component(&name, &base_path, css, props, docs, test, story)?
+                }
+                Kind::Hook => generate_hook(&name)?,
+                Kind::Interface => generate_interface(&name, &base_path)?,
+            }
+        }
     }
 
     Ok(())

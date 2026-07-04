@@ -34,16 +34,19 @@ pub enum Command {
         #[arg(long)]
         story: bool,
 
-        #[arg(long, default_value = "src/components")]
-        path: PathBuf,
+        #[arg(long)]
+        path: Option<PathBuf>,
     },
 }
 
-#[derive(Clone, ValueEnum)]
+#[derive(Clone, Copy, ValueEnum)]
 pub enum Kind {
     #[value(alias = "c")]
     Component,
 
     #[value(alias = "h")]
     Hook,
+
+    #[value(alias = "i")]
+    Interface,
 }
