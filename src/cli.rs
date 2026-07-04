@@ -52,4 +52,7 @@ pub enum Kind {
     
     #[value(alias = "e")]
     Enum,
+    
+    #[value(alias = "t")]
+    Type,
 }

@@ -42,7 +42,7 @@ Currently, there are no options for hooks.
 - [ ] more types to generate 
   - [ ] context
   - [ ] store
-  - [ ] type
+  - [x] type
   - [x] interface
   - [x] enum
   - [ ] function

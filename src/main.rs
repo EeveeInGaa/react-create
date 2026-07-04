@@ -7,7 +7,13 @@ use std::io;
 use clap::Parser;
 
 use cli::{Cli, Command, Kind};
-use generators::{generate_component, generate_hook, generate_interface, generate_enum};
+use generators::{
+    generate_component, 
+    generate_hook, 
+    generate_interface, 
+    generate_enum, 
+    generate_type
+};
 
 fn main() -> io::Result<()> {
     let cli = Cli::parse();
@@ -28,6 +34,7 @@ fn main() -> io::Result<()> {
                 Kind::Hook => "src/hooks".into(),
                 Kind::Interface => "src/interfaces".into(),
                 Kind::Enum => "src/enums".into(),
+                Kind::Type => "src/types".into(),
             });
 
             match kind {
@@ -37,6 +44,7 @@ fn main() -> io::Result<()> {
                 Kind::Hook => generate_hook(&name)?,
                 Kind::Interface => generate_interface(&name, &base_path)?,
                 Kind::Enum => generate_enum(&name, &base_path)?,
+                Kind::Type => generate_type(&name, &base_path)?,
             }
         }
     }
