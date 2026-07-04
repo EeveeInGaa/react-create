@@ -44,7 +44,7 @@ Currently, there are no options for hooks.
   - [ ] store
   - [ ] type
   - [x] interface
-  - [ ] enum
+  - [x] enum
   - [ ] function
 - [ ] options for hooks
 - [ ] option to choose between tsx and jsx

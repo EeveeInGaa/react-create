@@ -49,4 +49,7 @@ pub enum Kind {
 
     #[value(alias = "i")]
     Interface,
+    
+    #[value(alias = "e")]
+    Enum,
 }
