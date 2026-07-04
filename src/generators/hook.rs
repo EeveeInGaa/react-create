@@ -1,12 +1,12 @@
 use std::{fs, io};
-use std::path::PathBuf;
+use std::path::Path;
 use console::style;
 use heck::ToUpperCamelCase;
 use crate::fs_utils::write_new_file;
 
-pub fn generate_hook(name: &str) -> io::Result<()> {
+pub fn generate_hook(name: &str, base_path: &Path) -> io::Result<()> {
     let hook_name = normalize_hook_name(name);
-    let dir = PathBuf::from("src/hooks");
+    let dir = base_path;
 
     fs::create_dir_all(&dir)?;
 
@@ -22,7 +22,7 @@ pub fn generate_hook(name: &str) -> io::Result<()> {
     write_new_file(&hook_path, &content)?;
 
     println!(
-        "Created Interface: {} {}",
+        "Created Hook: {} {}",
         style(hook_name).cyan().bold(),
         style(format!("(at: {})", hook_path.display())).dim()
     );

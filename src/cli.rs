@@ -1,4 +1,4 @@
-use clap::{Parser, Subcommand, ValueEnum};
+use clap::{Args, Parser, Subcommand};
 use std::path::PathBuf;
 
 #[derive(Parser)]
@@ -14,10 +14,25 @@ pub struct Cli {
 pub enum Command {
     #[command(alias = "g")]
     Gen {
-        #[arg(value_enum)]
-        kind: Kind,
+        #[command(subcommand)]
+        generator: Generator,
+    },
+}
 
-        name: String,
+#[derive(Args)]
+pub struct GeneratorArgs {
+    pub name: String,
+
+    #[arg(long)]
+    pub path: Option<PathBuf>,
+}
+
+#[derive(Subcommand)]
+pub enum Generator {
+    #[command(alias = "c")]
+    Component {
+        #[command(flatten)]
+        common: GeneratorArgs,
 
         #[arg(long)]
         css: bool,
@@ -33,29 +48,35 @@ pub enum Command {
 
         #[arg(long)]
         story: bool,
-
-        #[arg(long)]
-        path: Option<PathBuf>,
     },
-}
 
-#[derive(Clone, Copy, ValueEnum)]
-pub enum Kind {
-    #[value(alias = "c")]
-    Component,
+    #[command(alias = "h")]
+    Hook {
+        #[command(flatten)]
+        common: GeneratorArgs,
+    },
 
-    #[value(alias = "h")]
-    Hook,
+    #[command(alias = "i")]
+    Interface {
+        #[command(flatten)]
+        common: GeneratorArgs,
+    },
 
-    #[value(alias = "i")]
-    Interface,
-    
-    #[value(alias = "e")]
-    Enum,
-    
-    #[value(alias = "t")]
-    Type,
-    
-    #[value(alias = "fn")]
-    Function,
+    #[command(alias = "e")]
+    Enum {
+        #[command(flatten)]
+        common: GeneratorArgs,
+    },
+
+    #[command(alias = "t")]
+    Type {
+        #[command(flatten)]
+        common: GeneratorArgs,
+    },
+
+    #[command(alias = "fn")]
+    Function {
+        #[command(flatten)]
+        common: GeneratorArgs,
+    },
 }
