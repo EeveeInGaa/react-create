@@ -45,7 +45,7 @@ Currently, there are no options for hooks.
   - [x] type
   - [x] interface
   - [x] enum
-  - [ ] function
+  - [x] function
 - [ ] options for hooks
 - [ ] option to choose between tsx and jsx
 - [ ] option to add all files at once (typed props only with tsx)

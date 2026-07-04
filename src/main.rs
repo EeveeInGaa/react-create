@@ -8,11 +8,12 @@ use clap::Parser;
 
 use cli::{Cli, Command, Kind};
 use generators::{
-    generate_component, 
-    generate_hook, 
-    generate_interface, 
-    generate_enum, 
-    generate_type
+    generate_component,
+    generate_hook,
+    generate_interface,
+    generate_enum,
+    generate_type,
+    generate_function
 };
 
 fn main() -> io::Result<()> {
@@ -32,9 +33,10 @@ fn main() -> io::Result<()> {
             let base_path = path.unwrap_or_else(|| match kind {
                 Kind::Component => "src/components".into(),
                 Kind::Hook => "src/hooks".into(),
-                Kind::Interface => "src/interfaces".into(),
-                Kind::Enum => "src/enums".into(),
-                Kind::Type => "src/types".into(),
+                Kind::Interface => "src/utils/interfaces".into(),
+                Kind::Enum => "src/utils/enums".into(),
+                Kind::Type => "src/utils/types".into(),
+                Kind::Function => "src/utils/functions".into(),
             });
 
             match kind {
@@ -45,6 +47,7 @@ fn main() -> io::Result<()> {
                 Kind::Interface => generate_interface(&name, &base_path)?,
                 Kind::Enum => generate_enum(&name, &base_path)?,
                 Kind::Type => generate_type(&name, &base_path)?,
+                Kind::Function => generate_function(&name, &base_path)?,
             }
         }
     }

@@ -55,4 +55,7 @@ pub enum Kind {
     
     #[value(alias = "t")]
     Type,
+    
+    #[value(alias = "fn")]
+    Function,
 }
