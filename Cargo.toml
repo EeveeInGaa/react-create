@@ -7,3 +7,8 @@ edition = "2024"
 clap = { version = "4.6.1", features = ["derive"] }
 heck = "0.5.0"
 console = "0.16.3"
+
+[dev-dependencies]
+assert_cmd = "2.2.2"
+predicates = "3.1.4"
+tempfile = "3.27.0"
